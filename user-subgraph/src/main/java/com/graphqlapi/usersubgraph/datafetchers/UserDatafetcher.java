@@ -1,8 +1,8 @@
-package com.graphqlapi.userservice.datafetchers;
+package com.graphqlapi.usersubgraph.datafetchers;
 
-import com.graphqlapi.userservice.entities.User;
-import com.graphqlapi.userservice.repositories.UserRepository;
-import com.graphqlapi.userservice.services.UserService;
+import com.graphqlapi.usersubgraph.entities.User;
+import com.graphqlapi.usersubgraph.repositories.UserRepository;
+import com.graphqlapi.usersubgraph.services.UserService;
 import com.netflix.graphql.dgs.DgsComponent;
 import com.netflix.graphql.dgs.DgsMutation;
 import com.netflix.graphql.dgs.DgsQuery;

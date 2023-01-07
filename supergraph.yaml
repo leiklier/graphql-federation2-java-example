@@ -1,7 +1,7 @@
 
 federation_version: 2
 subgraphs:
-  user-service_api:
+  user-subgraph:
     routing_url: http://user-subgraph:8080/graphql
     schema:
-      file: ./user-service/src/main/resources/schema/schema.graphqls
+      file: ./user-subgraph/src/main/resources/schema/schema.graphqls

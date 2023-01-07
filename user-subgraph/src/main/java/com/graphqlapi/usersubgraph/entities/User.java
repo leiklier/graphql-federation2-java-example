@@ -1,4 +1,4 @@
-package com.graphqlapi.userservice.entities;
+package com.graphqlapi.usersubgraph.entities;
 
 import lombok.*;
 

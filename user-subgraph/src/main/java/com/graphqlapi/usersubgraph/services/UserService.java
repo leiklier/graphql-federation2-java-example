@@ -1,7 +1,7 @@
-package com.graphqlapi.userservice.services;
+package com.graphqlapi.usersubgraph.services;
 
-import com.graphqlapi.userservice.entities.User;
-import com.graphqlapi.userservice.repositories.UserRepository;
+import com.graphqlapi.usersubgraph.entities.User;
+import com.graphqlapi.usersubgraph.repositories.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

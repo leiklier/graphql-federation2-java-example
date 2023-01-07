@@ -13,12 +13,12 @@ services:
       - user-subgraph
   user-subgraph:
     build:
-      context: ./user-service
+      context: ./user-subgraph
     depends_on:
       - user-database
     volumes:
-      - ./user-service:/app
-      - ./user-service/.gradle:/root/.gradle
+      - ./user-subgraph:/app
+      - ./user-subgraph/.gradle:/root/.gradle
     ports:
       - 8080:8080
       - 5005:5005

@@ -1,13 +1,13 @@
-package com.graphqlapi.userservice;
+package com.graphqlapi.usersubgraph;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-public class UserServiceApplication {
+public class UserSubgraphApplication {
 
 	public static void main(String[] args) {
-		SpringApplication.run(UserServiceApplication.class, args);
+		SpringApplication.run(UserSubgraphApplication.class, args);
 	}
 
 }

@@ -1,6 +1,6 @@
-package com.graphqlapi.userservice.repositories;
+package com.graphqlapi.usersubgraph.repositories;
 
-import com.graphqlapi.userservice.entities.User;
+import com.graphqlapi.usersubgraph.entities.User;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
