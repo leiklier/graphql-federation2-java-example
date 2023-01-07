@@ -1,10 +1,21 @@
 version: '3.3'
 services:
-  user-service_api:
+  router:
+    image: ghcr.io/apollographql/router:v1.4.0
+    volumes:
+      - ./router.yaml:/dist/config/router.yaml
+      - ./supergraph.graphql:/dist/config/supergraph.graphql
+    ports:
+      - 3000:3000
+      - 8088:8088
+    command: -c config/router.yaml -s config/supergraph.graphql
+    depends_on:
+      - user-subgraph
+  user-subgraph:
     build:
       context: ./user-service
     depends_on:
-      - user-service_database
+      - user-database
     volumes:
       - ./user-service:/app
       - ./user-service/.gradle:/root/.gradle
@@ -12,10 +23,15 @@ services:
       - 8080:8080
       - 5005:5005
     environment:
-      - SPRING_DATASOURCE_URL=jdbc:postgresql://user-service_database:5432/postgres
+      - SPRING_DATASOURCE_URL=jdbc:postgresql://user-database:5432/postgres
       - SPRING_DATASOURCE_USERNAME=postgres
       - SPRING_DATASOURCE_PASSWORD=postgres
-  user-service_database:
+    healthcheck:
+      test: [ "CMD", "curl", "http://user-subgraph:8080/actuator/health" ]
+      interval: 5s
+      timeout: 1s
+      retries: 10
+  user-database:
     image: postgres:15.0
     restart: always
     environment:
