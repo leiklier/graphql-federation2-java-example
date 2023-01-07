@@ -1,15 +1,27 @@
 package com.graphqlapi.userservice.entities;
 
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
+
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.persistence.Table;
+import java.util.UUID;
+
+@Entity
+@Table(name = "app_user")
 @Getter
 @Setter
 @NoArgsConstructor
-@AllArgsConstructor
+@RequiredArgsConstructor
 public class User {
-    String id;
+    @Id
+    @GeneratedValue
+    UUID id;
+
+    @NonNull
     String firstName;
+
+    @NonNull
     String lastName;
 }
