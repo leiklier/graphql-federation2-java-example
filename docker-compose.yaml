@@ -1,0 +1,26 @@
+version: '3.3'
+services:
+  user-service_api:
+    build:
+      context: ./user-service
+    depends_on:
+      - user-service_database
+    volumes:
+      - ./user-service:/app
+      - ./user-service/.gradle:/root/.gradle
+    ports:
+      - 8080:8080
+      - 5005:5005
+    environment:
+      - SPRING_DATASOURCE_URL=jdbc:postgresql://user-service_database:5432/postgres
+      - SPRING_DATASOURCE_USERNAME=postgres
+      - SPRING_DATASOURCE_PASSWORD=postgres
+  user-service_database:
+    image: postgres:15.0
+    restart: always
+    environment:
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=postgres
+      - POSTGRES_DB=postgres
+    ports:
+      - 5500:5432
