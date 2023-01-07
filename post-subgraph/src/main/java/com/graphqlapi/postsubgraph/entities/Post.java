@@ -17,6 +17,9 @@ public class Post {
     @GeneratedValue
     UUID id;
 
+    @NonNull
+    UUID authorId;
+
     String title;
 
     @NonNull

@@ -1,22 +1,26 @@
 package com.graphqlapi.usersubgraph.datafetchers;
 
 import com.graphqlapi.usersubgraph.entities.User;
-import com.graphqlapi.usersubgraph.repositories.UserRepository;
 import com.graphqlapi.usersubgraph.services.UserService;
-import com.netflix.graphql.dgs.DgsComponent;
-import com.netflix.graphql.dgs.DgsMutation;
-import com.netflix.graphql.dgs.DgsQuery;
-import com.netflix.graphql.dgs.InputArgument;
+import com.netflix.graphql.dgs.*;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.List;
+import java.util.Map;
+import java.util.UUID;
 
 @DgsComponent
 @Slf4j
 public class UserDatafetcher {
     @Autowired
     UserService userService;
+
+    @DgsEntityFetcher(name = "User")
+    public User user(Map<String, Object> values) {
+        UUID userId = UUID.fromString((String) values.get("id"));
+        return userService.getById(userId).get();
+    }
 
     @DgsMutation
     User createUser(@InputArgument String firstName,

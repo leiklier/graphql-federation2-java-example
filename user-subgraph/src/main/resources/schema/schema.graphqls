@@ -6,7 +6,7 @@ type Mutation {
     createUser(firstName: String!, lastName: String!): User
 }
 
-type User {
+type User @key(fields: "id") {
     id: ID!
     firstName: String!
     lastName: String!

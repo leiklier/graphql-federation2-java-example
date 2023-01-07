@@ -8,3 +8,5 @@ spring:
       ddl-auto: update
   h2:
     console.enabled: true
+dgs:
+  reload: true
