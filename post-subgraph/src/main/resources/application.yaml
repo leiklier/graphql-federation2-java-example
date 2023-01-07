@@ -1,0 +1,10 @@
+spring:
+  datasource:
+    # NB: Set url, username and password in env variables
+    driverClassName: org.postgresql.Driver
+  jpa:
+    database-platform: org.hibernate.dialect.PostgreSQLDialect
+    hibernate:
+      ddl-auto: update
+  h2:
+    console.enabled: true

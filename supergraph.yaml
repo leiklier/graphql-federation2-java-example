@@ -5,3 +5,7 @@ subgraphs:
     routing_url: http://user-subgraph:8080/graphql
     schema:
       file: ./user-subgraph/src/main/resources/schema/schema.graphqls
+  post-subgraph:
+    routing_url: http://post-subgraph:8080/graphql
+    schema:
+      file: ./post-subgraph/src/main/resources/schema/schema.graphqls

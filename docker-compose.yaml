@@ -11,6 +11,8 @@ services:
     command: -c config/router.yaml -s config/supergraph.graphql
     depends_on:
       - user-subgraph
+      - post-subgraph
+
   user-subgraph:
     build:
       context: ./user-subgraph
@@ -40,3 +42,33 @@ services:
       - POSTGRES_DB=postgres
     ports:
       - 5500:5432
+
+  post-subgraph:
+    build:
+      context: ./post-subgraph
+    depends_on:
+      - post-database
+    volumes:
+      - ./post-subgraph:/app
+      - ./post-subgraph/.gradle:/root/.gradle
+    ports:
+      - 8081:8080
+      - 5006:5005
+    environment:
+      - SPRING_DATASOURCE_URL=jdbc:postgresql://post-database:5432/postgres
+      - SPRING_DATASOURCE_USERNAME=postgres
+      - SPRING_DATASOURCE_PASSWORD=postgres
+    healthcheck:
+      test: [ "CMD", "curl", "http://post-subgraph:8080/actuator/health" ]
+      interval: 5s
+      timeout: 1s
+      retries: 10
+  post-database:
+    image: postgres:15.0
+    restart: always
+    environment:
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=postgres
+      - POSTGRES_DB=postgres
+    ports:
+      - 5501:5432
