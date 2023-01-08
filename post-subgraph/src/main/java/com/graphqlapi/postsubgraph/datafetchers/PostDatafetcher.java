@@ -19,25 +19,18 @@ public class PostDatafetcher {
     @Autowired
     PostService postService;
 
-    @Autowired
-    PostMapper postMapper;
-
-    @DgsEntityFetcher(name = "User")
-    public UserDto user(Map<String, Object> values) {
-        return new UserDto((UUID) values.get("id"));
+    @DgsQuery
+    List<PostDto> postsByAuthor(@InputArgument String authorId) {
+        log.info("Executing query postsByUserId");
+        List<Post> posts =  postService.getByAuthorId(UUID.fromString(authorId));
+        return posts.stream().map(PostMapper::convertEntityToDto).toList();
     }
 
     @DgsMutation
     PostDto publishPost(@InputArgument String authorId, @InputArgument String body) {
         Post postCreated = postService.create(UUID.fromString(authorId), body);
-        PostDto postDto =  postMapper.convertEntityToDto(postCreated);
+        PostDto postDto =  PostMapper.convertEntityToDto(postCreated);
         log.info(String.format("Created post with id {%s} and authorId {%s}", postDto.getId(), postDto.getAuthor().getId()));
         return postDto;
-    }
-
-    @DgsQuery
-    List<Post> postsByUserId() {
-        log.info("Executing query postsByUserId");
-        return postService.getAll();
     }
 }

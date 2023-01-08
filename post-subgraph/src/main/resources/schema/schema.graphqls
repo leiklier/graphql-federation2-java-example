@@ -1,5 +1,5 @@
 type Query {
-    postsByUserId(userId: String!): [Post]
+    postsByAuthor(authorId: String!): [Post]
 }
 
 type Mutation {

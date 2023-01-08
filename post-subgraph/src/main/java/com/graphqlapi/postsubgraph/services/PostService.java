@@ -3,6 +3,7 @@ package com.graphqlapi.postsubgraph.services;
 import com.graphqlapi.postsubgraph.entities.Post;
 import com.graphqlapi.postsubgraph.repositories.PostRepository;
 import graphql.com.google.common.collect.Lists;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -20,7 +21,7 @@ public class PostService {
         return postCreated;
     }
 
-    public List<Post> getAll() {
-        return Lists.newArrayList(postRepository.findAll());
+    public List<Post> getByAuthorId(UUID authorId) {
+        return postRepository.findByAuthorId(authorId);
     }
 }
